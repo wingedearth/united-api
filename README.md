@@ -30,6 +30,10 @@ The GraphQL server will be available at `http://localhost:4000`
 - `npm run dev` - Start development server with hot reload
 - `npm run build` - Build the project for production
 - `npm start` - Start the production server
+- `npm test` - Run tests in watch mode
+- `npm run test:run` - Run tests once
+- `npm run test:ui` - Run tests with UI interface
+- `npm run commitlint` - Check the last commit message format
 
 ### GraphQL Playground
 
@@ -43,4 +47,73 @@ Try this basic query in the playground:
 query {
   hello
 }
+```
+
+## Testing
+
+This project uses [Vitest](https://vitest.dev/) for testing.
+
+### Running Tests
+
+```bash
+# Run tests in watch mode (development)
+npm test
+
+# Run tests once (CI/production)
+npm run test:run
+
+# Run tests with UI interface
+npm run test:ui
+```
+
+### Writing Tests
+
+Tests are located in the `src/__tests__/` directory. Test files should follow the naming convention `*.test.ts`.
+
+Example test:
+```typescript
+import { describe, it, expect } from 'vitest';
+
+describe('My Feature', () => {
+  it('should work correctly', () => {
+    expect(1 + 1).toBe(2);
+  });
+});
+```
+
+## Conventional Commits
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) to ensure consistent commit message formatting. Commit messages are automatically validated using commitlint.
+
+### Commit Message Format
+
+```
+<type>: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+### Types
+
+- `feat`: A new feature
+- `fix`: A bug fix
+- `docs`: Documentation only changes
+- `style`: Changes that do not affect the meaning of the code
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `perf`: A code change that improves performance
+- `test`: Adding missing tests or correcting existing tests
+- `chore`: Changes to the build process or auxiliary tools
+- `ci`: Changes to CI configuration files and scripts
+- `build`: Changes that affect the build system or external dependencies
+- `revert`: Reverts a previous commit
+
+### Examples
+
+```bash
+feat: add user authentication
+fix: resolve GraphQL query timeout issue
+docs: update API documentation
+chore: update dependencies
 ```
