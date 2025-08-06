@@ -5,13 +5,17 @@ A GraphQL server for client applications to access data from services.
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- npm
+- Node.js (v22.16.0 or higher)
+- npm (v10.0.0 or higher)
 
 ### Installation
 
 1. Clone the repository
-2. Install dependencies:
+2. Use the correct Node.js version (if using nvm):
+   ```bash
+   nvm use
+   ```
+3. Install dependencies:
    ```bash
    npm install
    ```

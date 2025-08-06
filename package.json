@@ -17,6 +17,10 @@
     "release:major": "standard-version --release-as major",
     "release:patch": "standard-version --release-as patch"
   },
+  "engines": {
+    "node": ">=22.16.0",
+    "npm": ">=10.0.0"
+  },
   "dependencies": {
     "@apollo/server": "^4.9.5",
     "graphql": "^16.8.1"
