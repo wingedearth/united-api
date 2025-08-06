@@ -34,6 +34,10 @@ The GraphQL server will be available at `http://localhost:4000`
 - `npm run test:run` - Run tests once
 - `npm run test:ui` - Run tests with UI interface
 - `npm run commitlint` - Check the last commit message format
+- `npm run release` - Generate changelog and create a new release
+- `npm run release:patch` - Create a patch release (1.0.0 → 1.0.1)
+- `npm run release:minor` - Create a minor release (1.0.0 → 1.1.0)
+- `npm run release:major` - Create a major release (1.0.0 → 2.0.0)
 
 ### GraphQL Playground
 
@@ -80,6 +84,35 @@ describe('My Feature', () => {
   });
 });
 ```
+
+## Releases and Changelog
+
+This project uses [standard-version](https://github.com/conventional-changelog/standard-version) to automatically generate changelogs and manage releases based on conventional commits.
+
+### Creating a Release
+
+```bash
+# Automatically determine the next version based on commits
+npm run release
+
+# Force a specific release type
+npm run release:patch  # 1.0.0 → 1.0.1
+npm run release:minor  # 1.0.0 → 1.1.0
+npm run release:major  # 1.0.0 → 2.0.0
+```
+
+### What happens during a release:
+
+1. Analyzes commits since the last release
+2. Determines the next version number
+3. Updates `package.json` version
+4. Generates/updates `CHANGELOG.md`
+5. Creates a git tag
+6. Commits the changes
+
+### Changelog
+
+The changelog is automatically generated from conventional commit messages. See [CHANGELOG.md](./CHANGELOG.md) for the full project history.
 
 ## Conventional Commits
 
