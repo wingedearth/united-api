@@ -1,6 +1,6 @@
 # united-api
 
-A GraphQL server for client applications to access data from services.
+A GraphQL server for client applications to access data from services. This server integrates with the [users-service](https://github.com/wingedearth/users-service) REST API to provide GraphQL access to user management functionality.
 
 ## Getting Started
 
@@ -15,7 +15,12 @@ A GraphQL server for client applications to access data from services.
    ```bash
    nvm use
    ```
-3. Install dependencies:
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+4. Install dependencies:
    ```bash
    npm install
    ```
@@ -48,46 +53,184 @@ The GraphQL server will be available at `http://localhost:4000`
 Once the server is running, you can access the GraphQL Playground at:
 `http://localhost:4000`
 
-### Basic Query
+### GraphQL API
 
-Try this basic query in the playground:
+The server provides a comprehensive GraphQL API that integrates with the users-service. Here are some example queries:
+
+#### Health Check (Public)
 ```graphql
 query {
-  hello
+  health {
+    status
+    timestamp
+    service
+  }
 }
 ```
 
+#### Authentication (Public)
+```graphql
+# Register a new user
+mutation {
+  register(input: {
+    email: "user@example.com"
+    password: "securePassword123"
+    firstName: "John"
+    lastName: "Doe"
+  }) {
+    token
+    user {
+      id
+      email
+      firstName
+      lastName
+      role
+    }
+  }
+}
+
+# Login
+mutation {
+  login(input: {
+    email: "user@example.com"
+    password: "securePassword123"
+  }) {
+    token
+    user {
+      id
+      email
+      role
+    }
+  }
+}
+```
+
+#### User Queries (Require Authentication)
+```graphql
+# Get current user
+query {
+  me {
+    id
+    email
+    firstName
+    lastName
+    role
+  }
+}
+
+# Get all users
+query {
+  users {
+    id
+    email
+    firstName
+    lastName
+    role
+  }
+}
+```
+
+**Note**: For authenticated queries, include the JWT token in the Authorization header:
+```
+Authorization: Bearer <your-jwt-token>
+```
+
+See [examples/queries.graphql](./examples/queries.graphql) for more comprehensive examples.
+
+## Users Service Integration
+
+This GraphQL server acts as a gateway to the [users-service](https://github.com/wingedearth/users-service) REST API. 
+
+### Configuration
+
+Set the users-service URL in your `.env` file:
+```bash
+USERS_SERVICE_URL=http://localhost:3000
+```
+
+### Features
+
+- **Authentication**: Register and login users via GraphQL mutations
+- **User Management**: CRUD operations for users with proper authorization
+- **Role-Based Access**: Admin-only operations for user promotion/demotion
+- **Real-time Data**: Direct integration with users-service ensures data consistency
+- **Error Handling**: Comprehensive error handling with meaningful GraphQL error codes
+
+### Authentication Flow
+
+1. **Register/Login**: Use public mutations to get a JWT token
+2. **Include Token**: Add `Authorization: Bearer <token>` header to requests
+3. **Access Protected Data**: Query user data and perform operations based on your role
+
+### Prerequisites
+
+Make sure the users-service is running before starting this GraphQL server:
+
+```bash
+# In your users-service directory
+npm run dev
+```
+
+The users-service should be available at `http://localhost:3000` (or your configured URL).
+
 ## Testing
 
-This project uses [Vitest](https://vitest.dev/) for testing.
+This project uses [Vitest](https://vitest.dev/) for comprehensive testing with full TypeScript support. Tests are located in the `src/__tests__` directory.
 
 ### Running Tests
 
 ```bash
-# Run tests in watch mode (development)
+# Run tests in watch mode
 npm test
 
-# Run tests once (CI/production)
+# Run tests once
 npm run test:run
 
-# Run tests with UI interface
+# Run tests with coverage report
+npm run test:coverage
+
+# Run tests with UI
 npm run test:ui
 ```
 
-### Writing Tests
+### Test Structure
 
-Tests are located in the `src/__tests__/` directory. Test files should follow the naming convention `*.test.ts`.
+- **Unit Tests**: 
+  - `basic.test.ts` - Basic functionality tests
+  - `context.test.ts` - JWT context and authentication tests
+  - `usersService.test.ts` - Users service client tests
+  - `resolvers.test.ts` - GraphQL resolver tests
+  - `integration.test.ts` - Full GraphQL schema integration tests
 
-Example test:
-```typescript
-import { describe, it, expect } from 'vitest';
+- **Test Coverage**: Comprehensive coverage including:
+  - Authentication and authorization flows
+  - GraphQL schema validation
+  - Error handling scenarios
+  - JWT token processing
+  - Users service integration
+  - Admin role verification
 
-describe('My Feature', () => {
-  it('should work correctly', () => {
-    expect(1 + 1).toBe(2);
-  });
-});
-```
+### Test Features
+
+- **Mocking**: Uses Vitest's built-in mocking for:
+  - External HTTP requests (axios)
+  - JWT token decoding
+  - Users service methods
+- **Type Safety**: Full TypeScript support in tests
+- **Coverage Reports**: HTML and JSON coverage reports
+- **Integration Testing**: Tests actual GraphQL operations
+
+### Coverage Report
+
+The test suite provides excellent coverage of core functionality:
+- Context and authentication: 100% coverage
+- GraphQL schema: 100% coverage  
+- Resolvers and services: 50%+ coverage
+- Overall project coverage: ~57%
+
+### Pre-commit Testing
+
+Tests are automatically run before each commit via Husky hooks to ensure code quality and prevent regressions.
 
 ## Releases and Changelog
 

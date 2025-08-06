@@ -1,0 +1,210 @@
+# Health Check (Public)
+query HealthCheck {
+  health {
+    status
+    timestamp
+    service
+  }
+}
+
+# Register User (Public)
+mutation RegisterUser {
+  register(input: {
+    email: "john.doe@example.com"
+    password: "securePassword123"
+    firstName: "John"
+    lastName: "Doe"
+    phoneNumber: "+1234567890"
+    address: {
+      street: "123 Main St"
+      city: "Anytown"
+      state: "CA"
+      zipCode: "12345"
+      country: "USA"
+    }
+  }) {
+    token
+    user {
+      id
+      email
+      firstName
+      lastName
+      role
+      phoneNumber
+      address {
+        street
+        city
+        state
+        zipCode
+        country
+      }
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+# Login User (Public)
+mutation LoginUser {
+  login(input: {
+    email: "john.doe@example.com"
+    password: "securePassword123"
+  }) {
+    token
+    user {
+      id
+      email
+      firstName
+      lastName
+      role
+    }
+  }
+}
+
+# Get Current User (Requires Authentication)
+# Add Authorization header: Bearer <your-jwt-token>
+query GetMe {
+  me {
+    id
+    email
+    firstName
+    lastName
+    role
+    phoneNumber
+    address {
+      street
+      city
+      state
+      zipCode
+      country
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+# Get All Users (Requires Authentication)
+query GetAllUsers {
+  users {
+    id
+    email
+    firstName
+    lastName
+    role
+    createdAt
+    updatedAt
+  }
+}
+
+# Get User by ID (Requires Authentication)
+query GetUserById {
+  user(id: "507f1f77bcf86cd799439011") {
+    id
+    email
+    firstName
+    lastName
+    role
+    phoneNumber
+    address {
+      street
+      city
+      state
+      zipCode
+      country
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+# Create User (Requires Authentication)
+mutation CreateUser {
+  createUser(input: {
+    email: "jane.smith@example.com"
+    password: "securePassword123"
+    firstName: "Jane"
+    lastName: "Smith"
+    phoneNumber: "+1987654321"
+  }) {
+    id
+    email
+    firstName
+    lastName
+    role
+    phoneNumber
+    createdAt
+    updatedAt
+  }
+}
+
+# Update User (Requires Authentication)
+mutation UpdateUser {
+  updateUser(
+    id: "507f1f77bcf86cd799439011"
+    input: {
+      firstName: "Jane"
+      lastName: "Doe"
+      phoneNumber: "+1555666777"
+    }
+  ) {
+    id
+    email
+    firstName
+    lastName
+    phoneNumber
+    updatedAt
+  }
+}
+
+# Delete User (Requires Authentication)
+mutation DeleteUser {
+  deleteUser(id: "507f1f77bcf86cd799439011") {
+    id
+    email
+    firstName
+    lastName
+  }
+}
+
+# Promote User to Admin (Requires Admin Role)
+mutation PromoteUser {
+  promoteUser(id: "507f1f77bcf86cd799439011") {
+    id
+    email
+    firstName
+    lastName
+    role
+    updatedAt
+  }
+}
+
+# Demote Admin to User (Requires Admin Role)
+mutation DemoteUser {
+  demoteUser(id: "507f1f77bcf86cd799439011") {
+    id
+    email
+    firstName
+    lastName
+    role
+    updatedAt
+  }
+}
+
+# Get Admin Statistics (Requires Admin Role)
+query GetAdminStats {
+  adminStats {
+    stats {
+      totalUsers
+      totalAdmins
+      regularUsers
+    }
+    recentUsers {
+      id
+      email
+      firstName
+      lastName
+      role
+      createdAt
+    }
+  }
+}
