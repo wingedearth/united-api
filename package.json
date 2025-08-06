@@ -1,6 +1,6 @@
 {
   "name": "united-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A GraphQL server for client applications to access data from services",
   "main": "dist/index.js",
   "scripts": {
