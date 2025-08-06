@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/wingedearth/united-api/compare/v1.1.1...v1.2.0) (2025-08-06)
+
+
+### Features
+
+* integrate apolloserver with users-service ([8cf11aa](https://github.com/wingedearth/united-api/commit/8cf11aa0d64727fe631cb9db46029edc850662d7))
+
+
+### Chores
+
+* remove Lowercase requirement on commit subjects ([7af057d](https://github.com/wingedearth/united-api/commit/7af057d6f3956d7ff3db507bee020421d03cb873))
+
 ### [1.1.1](https://github.com/wingedearth/united-api/compare/v1.1.0...v1.1.1) (2025-08-06)
 
 
