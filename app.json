@@ -1,0 +1,39 @@
+{
+  "name": "wingedearth-united-api",
+  "description": "A GraphQL server for client applications to access data from services",
+  "repository": "https://github.com/wingedearth/united-api",
+  "logo": "https://cdn.jsdelivr.net/gh/apollographql/apollo-server@main/packages/apollo-server-core/src/assets/apollo-server-logo.png",
+  "keywords": ["graphql", "apollo", "server", "api", "typescript"],
+  "image": "heroku/nodejs",
+  "stack": "heroku-22",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "env": {
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    },
+    "PORT": {
+      "description": "Port for the server to listen on",
+      "value": "4000"
+    },
+    "USERS_SERVICE_URL": {
+      "description": "URL of the users service API",
+      "value": "https://wingedearth-users-service-174104f65795.herokuapp.com",
+      "required": true
+    }
+  },
+  "scripts": {
+    "postdeploy": "echo 'Deployment completed successfully!'"
+  },
+  "addons": []
+}

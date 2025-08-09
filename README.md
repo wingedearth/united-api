@@ -297,3 +297,87 @@ fix: resolve GraphQL query timeout issue
 docs: update API documentation
 chore: update dependencies
 ```
+
+## Deployment
+
+This application is configured for easy deployment to Heroku.
+
+### Heroku Deployment
+
+This application is configured for **automatic deployment** from GitHub to Heroku. Any changes pushed to the `main` branch will automatically trigger a new deployment.
+
+#### Automatic Deployment Setup
+
+The app is already configured with:
+- **GitHub Integration**: Automatic deployments from the `main` branch
+- **Environment Variables**: Pre-configured with the correct users-service URL
+- **Build Process**: Automatic TypeScript compilation via `heroku-postbuild`
+
+#### Manual Deployment (if needed)
+
+If you need to deploy manually:
+
+1. **Set environment variables** (if not already set):
+   ```bash
+   heroku config:set USERS_SERVICE_URL=https://wingedearth-users-service-174104f65795.herokuapp.com
+   heroku config:set NODE_ENV=production
+   ```
+
+2. **Deploy via Git** (if GitHub integration is disabled):
+   ```bash
+   # Add Heroku remote if not already added
+   heroku git:remote -a wingedearth-united-api
+   
+   # Deploy to Heroku
+   git push heroku main
+   ```
+
+#### Environment Variables
+
+Set these environment variables in your Heroku app:
+
+- `USERS_SERVICE_URL`: URL of your deployed users-service
+- `NODE_ENV`: Set to `production`
+- `PORT`: Automatically set by Heroku
+
+#### Deployment Configuration
+
+The app includes:
+- `Procfile`: Defines the web process
+- `app.json`: Heroku app configuration
+- `.slugignore`: Excludes unnecessary files from deployment
+- `heroku-postbuild`: Automatically builds TypeScript on deployment
+
+#### One-Click Deploy
+
+You can also deploy directly from GitHub using the Deploy to Heroku button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wingedearth/united-api)
+
+### Automatic Deployment Benefits
+
+- **Continuous Integration**: Every push to `main` triggers automatic deployment
+- **Zero Downtime**: Heroku handles rolling deployments
+- **Build Validation**: Failed builds prevent deployment
+- **Rollback Support**: Easy rollback to previous versions if needed
+
+### Production Considerations
+
+- **Environment Variables**: All required variables are pre-configured
+- **Users Service**: Integrated with your deployed users-service
+- **CORS**: Configure CORS settings if needed for your frontend applications
+- **Monitoring**: Consider adding logging and monitoring services
+- **Scaling**: Use Heroku's scaling features as needed
+- **Branch Protection**: Consider protecting the `main` branch to require PR reviews
+
+### Verifying Deployment
+
+After deployment, test your GraphQL endpoint:
+
+```bash
+curl -X POST https://wingedearth-united-api.herokuapp.com/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query": "{ health { status timestamp service } }"}'
+```
+
+**Live GraphQL Playground**: https://wingedearth-united-api.herokuapp.com/graphql

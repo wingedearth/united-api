@@ -1,0 +1,27 @@
+# Test files
+src/__tests__/
+*.test.ts
+*.spec.ts
+vitest.config.ts
+coverage/
+
+# Development files
+.env.example
+.nvmrc
+.husky/
+.commitlintrc.json
+
+# Documentation
+README.md
+CHANGELOG.md
+examples/
+
+# Development dependencies
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
