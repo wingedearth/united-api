@@ -12,6 +12,11 @@ async function startServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    // Enable Apollo Studio sandbox in production
+    introspection: true,
+    // Disable CSRF prevention for easier development/testing
+    // In production, you might want to configure this more strictly
+    csrfPrevention: false,
   });
 
   const port = parseInt(process.env.PORT || '4000', 10);
