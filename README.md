@@ -32,7 +32,9 @@ Start the development server:
 npm run dev
 ```
 
-The GraphQL server will be available at `http://localhost:4000`
+The GraphQL server will be available at `http://localhost:4000/graphql`
+
+> 💡 **Apollo Studio Sandbox**: Visit `http://localhost:4000/graphql` in your browser for the interactive GraphQL playground.
 
 ### Available Scripts
 
@@ -48,10 +50,42 @@ The GraphQL server will be available at `http://localhost:4000`
 - `npm run release:minor` - Create a minor release (1.0.0 → 1.1.0)
 - `npm run release:major` - Create a major release (1.0.0 → 2.0.0)
 
-### GraphQL Playground
+## Technical Stack
 
-Once the server is running, you can access the GraphQL Playground at:
-`http://localhost:4000`
+### Core Technologies
+- **Apollo Server 4**: Standalone GraphQL server with built-in Apollo Studio sandbox
+- **TypeScript**: Full type safety and modern JavaScript features
+- **GraphQL**: Schema-first API design with introspection support
+- **Node.js**: Runtime environment (v22.16.0+)
+
+### Key Dependencies
+- `@apollo/server`: GraphQL server implementation
+- `graphql`: GraphQL query language and runtime
+- `axios`: HTTP client for REST API integration
+- `jsonwebtoken`: JWT token handling for authentication
+- `dotenv`: Environment variable management
+
+### Development & Testing
+- **Vitest**: Fast unit testing framework with coverage
+- **Husky**: Git hooks for code quality
+- **Commitlint**: Conventional commit message validation
+- **Standard Version**: Automated changelog and versioning
+
+### Deployment
+- **Heroku**: Cloud platform with automatic deployment
+- **GitHub Integration**: Continuous deployment from master branch
+- **TypeScript Build**: Automatic compilation on deployment
+
+### Apollo Studio Sandbox
+
+Once the server is running, you can access the interactive Apollo Studio sandbox at:
+`http://localhost:4000/graphql`
+
+The sandbox provides:
+- Interactive query editor with syntax highlighting
+- Schema exploration and documentation
+- Query history and saved operations
+- Real-time query execution and results
 
 ### GraphQL API
 
@@ -356,19 +390,20 @@ You can also deploy directly from GitHub using the Deploy to Heroku button:
 
 ### Automatic Deployment Benefits
 
-- **Continuous Integration**: Every push to `main` triggers automatic deployment
+- **Continuous Integration**: Every push to `master` triggers automatic deployment
 - **Zero Downtime**: Heroku handles rolling deployments
 - **Build Validation**: Failed builds prevent deployment
 - **Rollback Support**: Easy rollback to previous versions if needed
 
-### Production Considerations
+### Production Features
 
+- **Apollo Studio Sandbox**: Interactive GraphQL playground available in production
 - **Environment Variables**: All required variables are pre-configured
-- **Users Service**: Integrated with your deployed users-service
-- **CORS**: Configure CORS settings if needed for your frontend applications
-- **Monitoring**: Consider adding logging and monitoring services
-- **Scaling**: Use Heroku's scaling features as needed
-- **Branch Protection**: Consider protecting the `main` branch to require PR reviews
+- **Users Service Integration**: Connected to deployed users-service API
+- **Introspection Enabled**: Full GraphQL schema introspection for development
+- **CSRF Protection Disabled**: Easier access for development and testing
+- **Standalone Server**: Clean, lightweight Apollo Server setup
+- **TypeScript Build**: Automatic TypeScript compilation on deployment
 
 ### Verifying Deployment
 
@@ -380,4 +415,6 @@ curl -X POST https://wingedearth-united-api-76c9d860a852.herokuapp.com/graphql \
   -d '{"query": "{ health { status timestamp service } }"}'
 ```
 
-**Live GraphQL Playground**: https://wingedearth-united-api-76c9d860a852.herokuapp.com/graphql
+**Live Apollo Studio Sandbox**: https://wingedearth-united-api-76c9d860a852.herokuapp.com/graphql
+
+> 💡 **Tip**: Visit the GraphQL endpoint URL in your browser to access the interactive Apollo Studio sandbox for testing queries and exploring the schema.
