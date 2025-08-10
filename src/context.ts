@@ -15,6 +15,11 @@ export async function createContext({ req }: { req: any }): Promise<Context> {
   };
 
   try {
+    // Handle cases where req might not have headers (like landing page requests)
+    if (!req || !req.headers) {
+      return context;
+    }
+    
     // Extract token from Authorization header (case-insensitive)
     const authHeader = req.headers.authorization || req.headers.Authorization;
     if (authHeader && authHeader.startsWith('Bearer ')) {
