@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/wingedearth/united-api/compare/v1.2.0...v1.3.0) (2025-08-10)
+
+
+### Features
+
+* add Express server with Apollo Studio landing page ([722098b](https://github.com/wingedearth/united-api/commit/722098b5058327d2180777647038923655a21dda))
+* add Heroku deployment configuration ([9940c45](https://github.com/wingedearth/united-api/commit/9940c452a6a1f69f2524ea59eb17bed42403e823))
+* explicitly enable apollo studio sandbox in production ([eff60f3](https://github.com/wingedearth/united-api/commit/eff60f3429e17e833c3732d4287ee84b5dbd7a84))
+
+
+### Bug Fixes
+
+* enable Apollo Studio sandbox and disable CSRF prevention ([cfa2f81](https://github.com/wingedearth/united-api/commit/cfa2f8150bd8927574d8eb8f8043be88b1b78d5f))
+* revert to standalone server setup and remove unused express dependencies ([f7eda64](https://github.com/wingedearth/united-api/commit/f7eda649dac07dc06be876838f122f42de21f1d3))
+
+
+### Documentation
+
+* update documentation for production deployment ([2ac1634](https://github.com/wingedearth/united-api/commit/2ac163424e34ae6cd19ba0b9b626a9bf3aaba16f))
+
 ## [1.2.0](https://github.com/wingedearth/united-api/compare/v1.1.1...v1.2.0) (2025-08-06)
 
 
