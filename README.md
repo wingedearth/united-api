@@ -375,9 +375,9 @@ You can also deploy directly from GitHub using the Deploy to Heroku button:
 After deployment, test your GraphQL endpoint:
 
 ```bash
-curl -X POST https://wingedearth-united-api.herokuapp.com/graphql \
+curl -X POST https://wingedearth-united-api-76c9d860a852.herokuapp.com/graphql \
   -H "Content-Type: application/json" \
   -d '{"query": "{ health { status timestamp service } }"}'
 ```
 
-**Live GraphQL Playground**: https://wingedearth-united-api.herokuapp.com/graphql
+**Live GraphQL Playground**: https://wingedearth-united-api-76c9d860a852.herokuapp.com/graphql

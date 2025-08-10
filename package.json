@@ -26,7 +26,9 @@
   "dependencies": {
     "@apollo/server": "^4.9.5",
     "axios": "^1.11.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
+    "express": "^5.1.0",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^9.0.2",
@@ -35,6 +37,8 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.9.0",
     "@vitest/coverage-v8": "^3.2.4",
