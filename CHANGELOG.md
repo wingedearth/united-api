@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/wingedearth/united-api/compare/v1.3.0...v1.4.0) (2025-08-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* Rate limiting is now enforced on all GraphQL requests
+
+### Features
+
+* add rate limiting and security enhancements ([63dc1d6](https://github.com/wingedearth/united-api/commit/63dc1d68f6948c66b8e3da0dc6e293ca36270376))
+
 ## [1.3.0](https://github.com/wingedearth/united-api/compare/v1.2.0...v1.3.0) (2025-08-10)
 
 
