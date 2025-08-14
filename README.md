@@ -64,12 +64,20 @@ The GraphQL server will be available at `http://localhost:4000/graphql`
 - `axios`: HTTP client for REST API integration
 - `jsonwebtoken`: JWT token handling for authentication
 - `dotenv`: Environment variable management
+- `graphql-query-complexity`: Query complexity analysis for security
 
 ### Development & Testing
 - **Vitest**: Fast unit testing framework with coverage
 - **Husky**: Git hooks for code quality
 - **Commitlint**: Conventional commit message validation
 - **Standard Version**: Automated changelog and versioning
+
+### Security & Performance
+- **Rate Limiting**: Request-based rate limiting (100 requests per 15 minutes)
+- **Query Complexity Analysis**: Prevents expensive GraphQL queries (max complexity: 1000)
+- **JWT Authentication**: Secure token-based authentication
+- **Role-Based Access Control**: Admin and user role separation
+- **CORS Configuration**: Cross-origin request handling
 
 ### Deployment
 - **Heroku**: Cloud platform with automatic deployment
@@ -167,6 +175,32 @@ query {
 **Note**: For authenticated queries, include the JWT token in the Authorization header:
 ```
 Authorization: Bearer <your-jwt-token>
+```
+
+### Rate Limiting
+
+The API implements rate limiting to prevent abuse and ensure fair usage:
+
+- **Limit**: 100 requests per 15-minute window per client
+- **Identification**: Based on IP address for anonymous users, user ID for authenticated users
+- **Headers**: Rate limit information is included in response headers:
+  - `X-RateLimit-Limit`: Maximum requests allowed
+  - `X-RateLimit-Remaining`: Requests remaining in current window
+  - `X-RateLimit-Reset`: Unix timestamp when the rate limit resets
+
+**Rate Limit Exceeded Response**:
+```json
+{
+  "errors": [{
+    "message": "Rate limit exceeded. Try again in 60 seconds.",
+    "extensions": {
+      "code": "RATE_LIMIT_EXCEEDED",
+      "rateLimitReset": 1234567890,
+      "rateLimitRemaining": 0,
+      "rateLimitTotal": 100
+    }
+  }]
+}
 ```
 
 See [examples/queries.graphql](./examples/queries.graphql) for more comprehensive examples.

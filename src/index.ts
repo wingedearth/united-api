@@ -8,6 +8,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { typeDefs } from './schema';
 import { resolvers } from './resolvers';
 import { createContext } from './context';
+import { createRateLimitPlugin, createQueryComplexityPlugin } from './plugins';
 
 async function startServer() {
   const server = new ApolloServer({
@@ -20,6 +21,22 @@ async function startServer() {
     plugins: [
       // Force Apollo Studio sandbox in all environments
       ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+      // Rate limiting: 100 requests per 15 minutes per client
+      createRateLimitPlugin({
+        windowMs: 15 * 60 * 1000, // 15 minutes
+        maxRequests: 100,
+        skipSuccessfulRequests: false,
+        skipFailedRequests: false
+      }),
+      // Query complexity and depth limits (temporarily disabled due to GraphQL version conflicts)
+      // createQueryComplexityPlugin({
+      //   maximumComplexity: 1000,
+      //   maximumDepth: 10,
+      //   scalarCost: 1,
+      //   objectCost: 1,
+      //   listFactor: 10,
+      //   introspectionCost: 100
+      // })
     ],
   });
 
