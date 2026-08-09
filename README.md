@@ -86,8 +86,13 @@ The GraphQL server will be available at `http://localhost:4000/graphql`
 
 ### Apollo Studio Sandbox
 
+#### Local Development
 Once the server is running, you can access the interactive Apollo Studio sandbox at:
 `http://localhost:4000/graphql`
+
+#### Production
+The live production server is available at:
+**https://wingedearth-united-api-76c9d860a852.herokuapp.com/graphql**
 
 The sandbox provides:
 - Interactive query editor with syntax highlighting
