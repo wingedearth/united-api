@@ -122,7 +122,8 @@ export const resolvers = {
       try {
         return await usersService.login(input);
       } catch (error) {
-        throw new GraphQLError('Login failed', {
+        const message = error instanceof Error ? error.message : 'Login failed';
+        throw new GraphQLError(message, {
           extensions: { code: 'LOGIN_ERROR' },
         });
       }
